@@ -1,0 +1,37 @@
+# This policy prevents the creation of new auth methods within the namespace based on the type of namespace being created
+
+import "strings"
+
+auth_types = ["userpass", "github"]
+
+precond = rule {
+	request.operation in ["create", "update"] and
+	strings.has_prefix(request.path, "sys/auth/") and 
+    request.data.type is not empty
+}
+
+group_ids = ["5cabcca1-b04d-b09d-f8dd-1c1ec6b60b53"]
+
+group_match = func() {
+    # Check to see if entity is a member of the appropriate group
+
+    if (identity.groups.by_id else 0) is 0 {
+        print("Entity is not a member of any groups")
+        return false
+    }
+
+    if any group_ids as g {g in keys(identity.groups.by_id)} {
+        return true
+    } else {
+        print("The Entity is not a member of the Vault Admins group")
+        return false
+    }
+}
+
+auth_check = rule {
+    request.data.type not in auth_types
+}
+
+main = rule when precond{
+    auth_check or group_match()
+}
