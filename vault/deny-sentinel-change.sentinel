@@ -1,5 +1,7 @@
-# This policy prevents the modification of Sentinel policies applied within a Namespace
+# This policy prevents the modification of Sentinel policies applied within the namespace
+# Group IDs list needs to be updated with the list of group IDs that you want to exempt from this policy
 # Should be applied to sys/policies/*
+
 import "strings"
 
 precond = rule {

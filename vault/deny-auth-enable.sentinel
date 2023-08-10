@@ -1,4 +1,6 @@
-# This policy prevents the creation of new auth methods within the namespace based on the type of namespace being created
+# This policy prevents the creation of new auth methods of the specified type
+# Group IDs list needs to be updated with the list of group IDs that you want to exempt from this policy
+# The auth_types list should be updated with the auth methods that you want to disallow
 # Should be applied to "sys/auth/*"
 
 import "strings"
