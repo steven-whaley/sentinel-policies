@@ -1,5 +1,5 @@
 # This policy prevents the modification of Sentinel policies applied within a Namespace
-
+# Should be applied to sys/policies/*
 import "strings"
 
 precond = rule {

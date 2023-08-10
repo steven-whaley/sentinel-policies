@@ -1,4 +1,5 @@
 # This policy prevents the creation of new auth methods within the namespace based on the type of namespace being created
+# Should be applied to "sys/auth/*"
 
 import "strings"
 
